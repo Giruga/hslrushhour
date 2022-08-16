@@ -9,4 +9,5 @@ public class HSLRushHourDbContext : DbContext
 
     }
 
+    public DbSet<Disruption> Disruptions { get; set; } = null!;
 }
