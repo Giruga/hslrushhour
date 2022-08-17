@@ -8,7 +8,7 @@ namespace HSLRushHour.Backend.Clients.DigiTransitClient;
 
 public interface IDigiTransitClient
 {
-    Task<IEnumerable<DisruptionDto>> getDisturbances();
+    Task<IEnumerable<DisruptionDto>> getDisturbances(IList<string> existing);
 }
 
 public class DigiTransitClient : IDigiTransitClient
@@ -20,15 +20,14 @@ public class DigiTransitClient : IDigiTransitClient
         _client = client;
     }
 
-    public async Task<IEnumerable<DisruptionDto>> getDisturbances()
+    public async Task<IEnumerable<DisruptionDto>> getDisturbances(IList<string> existing)
     {
 
         var query = new GraphQLRequest
         {
-            @Query = @"
-                query disturbanceQuery 
-                {
+            @Query = @"{
                     alerts {
+                        id
                         alertHeaderText
                         alertDescriptionText
                         alertUrl
@@ -43,11 +42,11 @@ public class DigiTransitClient : IDigiTransitClient
                             code
                         }
                     }
-                } 
-            "
+                }"
         };
 
         var result = await _client.SendQueryAsync<ResponseDisturbanceCollectionType>(query);
-        return result.Data.Disruptions.Select(x => x.toDto());
+        var newData = result.Data.alerts.Where(x => !existing.Contains(x.id)).Select(x => x.toDto());
+        return newData;
     }
 }

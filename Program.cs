@@ -5,6 +5,7 @@ using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using HSLRushHour.Backend.Clients.DigiTransitClient;
+using HSLRushHour.Backend.Clients;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<HSLRushHourDbContext>(opt => opt.UseInMemoryDatabase("HSLRushHourDb"));
 builder.Services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient(Configuration["DigiTransitGraphiQLURL"], new NewtonsoftJsonSerializer()));
 builder.Services.AddScoped<IDigiTransitClient, DigiTransitClient>();
+builder.Services.AddHostedService<DigitransitBGWorker>();
 
 builder.Services.AddSwaggerGen(c =>
 {

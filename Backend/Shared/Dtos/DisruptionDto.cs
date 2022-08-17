@@ -2,6 +2,7 @@ namespace HSLRushHour.Backend.Shared.Dtos;
 
 public class DisruptionDto
 {
+    public string id { get; set; } = "";
     public string header { get; set; } = "";
     public string description { get; set; } = "";
     public DateTime start { get; set; }

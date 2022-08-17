@@ -2,11 +2,12 @@ namespace HSLRushHour.Backend.Clients.DigiTransitClient.GraphQLModels;
 
 public class DisruptionModel
 {
+    public string id { get; set; } = "";
     public string alertHeaderText { get; set; } = "";
     public string alertDescriptionText { get; set; } = "";
     public string alertUrl { get; set; } = "";
-    public DateTime effectiveStartDate { get; set; }
-    public DateTime effectiveEndDate { get; set; }
+    public long effectiveStartDate { get; set; }
+    public long effectiveEndDate { get; set; }
 
     public RouteModel? route { get; set; } = null;
     public StopModel? stop { get; set; } = null;

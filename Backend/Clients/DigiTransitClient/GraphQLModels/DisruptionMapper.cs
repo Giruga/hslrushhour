@@ -8,10 +8,11 @@ public static class DisruptionMapper
     {
         return new DisruptionDto()
         {
+            id = d.id,
             header = d.alertHeaderText,
             description = d.alertDescriptionText,
-            start = d.effectiveStartDate,
-            end = d.effectiveEndDate,
+            start = new DateTime(d.effectiveStartDate),
+            end = new DateTime(d.effectiveEndDate),
             routeNumber = d.route != null ? $"{d.route.shortName} : {d.route.longName}" : null,
             routeProvider = null
         };

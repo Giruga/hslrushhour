@@ -3,6 +3,7 @@ namespace HSLRushHour.Backend.Models;
 public class DisruptionEntity
 {
     public Guid id { get; set; }
+    public string digiTransitId { get; set; } = "";
     public string header { get; set; } = "";
     public string description { get; set; } = "";
     public DateTime start { get; set; }
@@ -12,5 +13,6 @@ public class DisruptionEntity
 
 public class BusRouteEntity
 {
+    public int id { get; set; }
     public string gtfsId { get; set; } = "";
 }
