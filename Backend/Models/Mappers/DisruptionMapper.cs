@@ -1,7 +1,9 @@
-namespace HSLRushHour.Backend.Models.Dtos.Mappers;
+using HSLRushHour.Backend.Models;
+
+namespace HSLRushHour.Backend.Shared.Dtos.Mappers;
 public static class DisruptionMapper
 {
-    public static DisruptionDto toDto(this Disruption d)
+    public static DisruptionDto toDto(this DisruptionEntity d)
     {
         var (dbRouteProvider, dbRouteNumber, _) = d.route?.gtfsId.Split(':');
 
@@ -12,7 +14,7 @@ public static class DisruptionMapper
             start = d.start,
             end = d.end,
             routeProvider = dbRouteProvider,
-            routeNumber = dbRouteNumber.Length > 0 ? Int32.Parse(dbRouteNumber) : null
+            routeNumber = dbRouteNumber.Length > 0 ? dbRouteNumber : null
         };
     }
 }

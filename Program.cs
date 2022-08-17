@@ -1,20 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using HSLRushHour.Backend.Models;
 using Microsoft.OpenApi.Models;
+using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.Newtonsoft;
+using HSLRushHour.Backend.Clients.DigiTransitClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+IConfiguration Configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
+    .Build();
 
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<HSLRushHourDbContext>(opt => opt.UseInMemoryDatabase("HSLRushHourDb"));
+builder.Services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient(Configuration["DigiTransitGraphiQLURL"], new NewtonsoftJsonSerializer()));
+builder.Services.AddScoped<IDigiTransitClient, DigiTransitClient>();
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "HSLRushHourApi",
-        Version = "v1"        
+        Version = "v1"
     });
 });
 

@@ -1,6 +1,6 @@
 using HSLRushHour.Backend.Models;
-using HSLRushHour.Backend.Models.Dtos;
-using HSLRushHour.Backend.Models.Dtos.Mappers;
+using HSLRushHour.Backend.Shared.Dtos;
+using HSLRushHour.Backend.Shared.Dtos.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
