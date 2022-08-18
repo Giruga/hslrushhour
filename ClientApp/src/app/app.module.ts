@@ -1,28 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
+import { DisruptionsComponent } from './components/disruptions/disruptions.component';
+import { AppRoutingModule } from './app.routing.module';
+import { StructuralModule } from './structural/structural.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavMenuComponent,
-
-  ],
+  declarations: [AppComponent, HomeComponent, DisruptionsComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-    ])
+    MatTableModule,
+    StructuralModule,
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
